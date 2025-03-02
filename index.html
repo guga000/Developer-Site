@@ -1,22 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Casino Slot Machine</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Login</title>
 </head>
 <body>
-  <div class="casino">
-    <h1>Mini Casino Slot Machine</h1>
-    <div class="slot-machine">
-      <div id="slot1" class="slot">?</div>
-      <div id="slot2" class="slot">?</div>
-      <div id="slot3" class="slot">?</div>
-    </div>
-    <button id="spin">Spin</button>
-    <p id="result"></p>
-  </div>
-  <script src="script.js"></script>
+  <h1>Login</h1>
+  <form action="/login" method="POST">
+    <label>Username: <input type="text" name="username" required /></label><br/>
+    <label>Password: <input type="password" name="password" required /></label><br/>
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
 </body>
 </html>
