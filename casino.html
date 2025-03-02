@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Virtual Casino</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="casino">
+    <h1>Virtual Casino Slot Machine</h1>
+    <p id="welcome">Loading...</p>
+    <p>Your Coins: <span id="coinBalance">Loading...</span></p>
+    <div class="slot-machine">
+      <div id="slot1" class="slot">?</div>
+      <div id="slot2" class="slot">?</div>
+      <div id="slot3" class="slot">?</div>
+    </div>
+    <button id="spin">Spin</button>
+    <p id="result"></p>
+    <p><a href="/logout">Logout</a></p>
+    <!-- For admin users, add a link to the admin dashboard -->
+    <p id="adminLink" style="display:none;"><a href="/admin">Admin Dashboard</a></p>
+  </div>
+  <script>
+    // Fetch user info from the API
+    fetch('/api/me')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('welcome').textContent = "Welcome, " + data.username;
+        document.getElementById('coinBalance').textContent = data.coins;
+        // For demo purposes, if the user is 'admin', show admin dashboard link.
+        if (data.username === 'admin') {
+          document.getElementById('adminLink').style.display = 'block';
+        }
+      });
+
+    const symbols = ["🍒", "🍋", "🍊", "🍉", "⭐", "💎"];
+
+    document.getElementById('spin').addEventListener('click', () => {
+      const slot1 = symbols[Math.floor(Math.random() * symbols.length)];
+      const slot2 = symbols[Math.floor(Math.random() * symbols.length)];
+      const slot3 = symbols[Math.floor(Math.random() * symbols.length)];
+
+      document.getElementById('slot1').textContent = slot1;
+      document.getElementById('slot2').textContent = slot2;
+      document.getElementById('slot3').textContent = slot3;
+
+      const resultText = (slot1 === slot2 && slot2 === slot3) ? "You win!" : "Try again!";
+      document.getElementById('result').textContent = resultText;
+    });
+  </script>
+</body>
+</html>
